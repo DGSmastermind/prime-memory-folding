@@ -1,0 +1,12 @@
+.prime_memory_folding/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+node_modules/
+.DS_Store
+benchmarks/results/

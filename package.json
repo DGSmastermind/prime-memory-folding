@@ -1,0 +1,27 @@
+{
+  "name": "prime-memory-folding",
+  "version": "0.1.0",
+  "description": "Prime-addressed memory encoding with vector-aware folding and MCP IDE integration.",
+  "type": "commonjs",
+  "bin": {
+    "prime-memory-folding-mcp": "./bin/prime-memory-folding-mcp.js"
+  },
+  "files": [
+    "bin",
+    "prime_memory_folding",
+    "README.md",
+    "docs",
+    "pyproject.toml"
+  ],
+  "scripts": {
+    "test": "python3 -m unittest discover -s tests"
+  },
+  "keywords": [
+    "mcp",
+    "memory",
+    "prime-encoding",
+    "ide",
+    "agents"
+  ],
+  "license": "MIT"
+}

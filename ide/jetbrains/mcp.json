@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "prime-memory-folding": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/Users/coryhubbell/Desktop/Code Projects/aether-hyper/PRIME memory Folding/bin/prime-memory-folding-mcp.js"
+      ],
+      "env": {
+        "PRIME_MEMORY_HOME": "/Users/coryhubbell/Desktop/Code Projects/aether-hyper/PRIME memory Folding/.prime_memory_folding"
+      }
+    }
+  }
+}
