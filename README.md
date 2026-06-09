@@ -4,16 +4,30 @@
 
 Standalone prime-addressed memory encoding with vector-aware folding and MCP IDE integration.
 
-Prime Memory Folding turns a memory store into three cooperating layers:
+**A small, honest, composable memory engine — extracted from the Aether-Hyper research system, with the math made public and the identity-bearing internals left behind.**
 
-- A prime-addressed hot path with an O(1) domain index and exact tag-intersection filtering.
-- Vector similarity for semantic recall.
-- Folding that decays, clusters, compresses, and promotes durable patterns.
-- Pluggable local persistence: JSON by default, or optional SQLite (stdlib, opt-in via a `.db`/`.sqlite` store path).
-- A stdio MCP server for IDE and agent clients.
-- A slim `evidence/` bundle that preserves the original Prime research trail without shipping Aether internals.
+Prime Memory Folding is not the claim that prime numbers beat databases. It is a reproducible *composition*: deterministic prime-addressed structure, semantic vector recall, decay-driven folding, and an MCP server — each layer doing the job it is actually good at, with a public claim surface kept deliberately narrower than the ambition. If a claim isn't demonstrable from the code, tests, benchmarks, or evidence in this repo, it isn't here.
 
-The performance story is intentionally grounded: bundled benchmarks show clear domain-index wins, faster raw tag predicates, and full tag queries at parity to modestly faster than naive in-memory scans depending on dataset and run noise. This is not a database replacement or an orders-of-magnitude claim.
+## What it is
+
+- **Exact structure** — an O(1) domain index plus exact tag intersection by unbounded prime-product divisibility (deterministic, not fuzzy).
+- **Meaning** — dependency-free cosine vector recall, additive to structure.
+- **Durability** — folding that decays, clusters, and compresses memory so it isn't an append-only log; JSON by default, optional stdlib SQLite.
+- **Reach** — a stdio MCP server (5 tools) with a CI-smoke-tested protocol handshake.
+- **Provenance** — a slim `evidence/` bundle showing the Aether origin; not imported by the runtime.
+
+## What it isn't
+
+- Not a database replacement; not "orders of magnitude" anything.
+- Not sublinear tag search — tag filtering is O(n) candidates × one modulo each; the O(1) part is the domain index.
+- Not validated against live IDE clients yet — the protocol handshake is smoke-tested in CI; live-client validation is a tracked release gate.
+- Not a consciousness runtime — the identity-bearing internals stayed home by design.
+
+## Why it's credible
+
+Benchmarks verify result-set equivalence *before* timing and show modest, dataset-dependent constant-factor wins over naive in-memory scans — stated as exactly that. The historical "60,000×" figure from the origin is retained only as caveated provenance. The repo was shaped by an adversarial build loop (a human director plus independent build/review lanes) that caught and corrected a broken headline encoding path and a benchmark that initially flattered the project.
+
+**Read deeper:** [Provenance & Breakthrough Thesis](docs/PUBLIC_THESIS.md) · [Technical Reproducibility Thesis](docs/TECHNICAL_REPRODUCIBILITY_THESIS.md)
 
 ## System Map
 
