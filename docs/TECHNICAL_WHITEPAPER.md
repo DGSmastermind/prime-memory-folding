@@ -135,15 +135,12 @@ The value is the composition:
 
 Near-term:
 
-- Add benchmark scripts comparing tag filters against naive scans.
 - Add importers for Markdown repositories.
 - Add a 29D adapter as optional Aether provenance support.
-- Add a stricter MCP protocol test harness.
 
 Mid-term:
 
 - Add Qdrant or FAISS backend adapter.
-- Add GitHub Action CI.
 - Publish pip package and npm launcher.
 - Add memory pack export/import.
 
