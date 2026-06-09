@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Optional SQLite persistence backend (standard-library `sqlite3`, zero new dependencies). `PrimeMemorySystem` auto-detects the backend from the store path suffix (`.db`/`.sqlite`/`.sqlite3` → SQLite; otherwise JSON, which remains the default). 128-bit addresses and unbounded `tag_product` values are stored as TEXT so they survive SQLite's 64-bit integer limit. Adds `migrate_json_to_sqlite` / `export_sqlite_to_json` plus round-trip, large-value, query/fold-after-load, and migration tests.
 - MCP server hardening: a malformed input line now returns a JSON-RPC parse error (-32700) without crashing the loop; tool failures return `isError` results per the MCP convention; added `ping`, invalid-request handling, and a stream-injectable transport for testing.
 - Added MCP protocol fixtures, a full initialize/tools-list/tools-call handshake smoke (also run in CI), and IDE-config validation tests.
 - Added reproducible filter benchmarks (`benchmarks/`) and optimized `query()` (removed the per-record address unpack; iterate record values directly) so prime filters beat naive in-memory scans.

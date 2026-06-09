@@ -6,15 +6,41 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 from .folding import FoldResult, MemoryFolder
+from .sqlite_store import load_store_from_sqlite, save_store_to_sqlite
 from .store import MemoryRecord, PrimeMemoryStore
+
+_SQLITE_SUFFIXES = (".db", ".sqlite", ".sqlite3")
+_VALID_BACKENDS = ("json", "sqlite")
+
+
+def backend_for_path(path: Optional[Path]) -> str:
+    """Infer the persistence backend from a store path's suffix."""
+    if path is not None and str(path).lower().endswith(_SQLITE_SUFFIXES):
+        return "sqlite"
+    return "json"
 
 
 class PrimeMemorySystem:
-    """Convenience facade combining store, retrieval, folding, and persistence."""
+    """Convenience facade combining store, retrieval, folding, and persistence.
 
-    def __init__(self, path: str | Path | None = None) -> None:
+    Persistence backend is JSON by default, or SQLite when the store path ends
+    in ``.db``/``.sqlite``/``.sqlite3`` (or when ``backend="sqlite"`` is passed).
+    """
+
+    def __init__(self, path: str | Path | None = None, backend: Optional[str] = None) -> None:
         self.path = Path(path) if path else None
-        self.store = PrimeMemoryStore.load(self.path) if self.path else PrimeMemoryStore()
+        resolved = (backend or backend_for_path(self.path)).lower()
+        if resolved not in _VALID_BACKENDS:
+            raise ValueError(
+                f"unknown backend {resolved!r}; expected one of {sorted(_VALID_BACKENDS)}"
+            )
+        self.backend = resolved
+        if self.path is None:
+            self.store = PrimeMemoryStore()
+        elif self.backend == "sqlite":
+            self.store = load_store_from_sqlite(self.path)
+        else:
+            self.store = PrimeMemoryStore.load(self.path)
         self.folder = MemoryFolder()
 
     def remember(
@@ -79,5 +105,9 @@ class PrimeMemorySystem:
         return self.store.stats()
 
     def save(self) -> None:
-        if self.path:
+        if not self.path:
+            return
+        if self.backend == "sqlite":
+            save_store_to_sqlite(self.store, self.path)
+        else:
             self.store.save(self.path)

@@ -9,6 +9,7 @@ Prime Memory Folding turns a memory store into three cooperating layers:
 - A prime-addressed hot path with an O(1) domain index and exact tag-intersection filtering.
 - Vector similarity for semantic recall.
 - Folding that decays, clusters, compresses, and promotes durable patterns.
+- Pluggable local persistence: JSON by default, or optional SQLite (stdlib, opt-in via a `.db`/`.sqlite` store path).
 - A stdio MCP server for IDE and agent clients.
 - A slim `evidence/` bundle that preserves the original Prime research trail without shipping Aether internals.
 
@@ -24,7 +25,7 @@ flowchart LR
     System --> Hot["Prime Hot Cache"]
     System --> Vector["Vector Similarity"]
     System --> Folder["Memory Folding"]
-    Hot --> Store["JSON Store v0.1"]
+    Hot --> Store["JSON or SQLite Store"]
     Vector --> Store
     Folder --> Store
     Evidence["Curated Evidence Bundle: provenance only"] -.-> System
@@ -190,7 +191,6 @@ Prime Memory Folding is standalone at runtime. The `evidence/` folder is not imp
 
 ## Roadmap
 
-- SQLite persistence backend.
 - GitHub release tag and path-neutral IDE setup templates.
 - Vector backend adapters, memory pack import/export, live IDE smoke validation, and optional Aether provenance adapters.
 

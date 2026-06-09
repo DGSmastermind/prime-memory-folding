@@ -64,7 +64,7 @@ Prime Memory Folding uses three conceptual tiers.
 Tier 1: Prime hot cache
   - 128-bit addresses
   - Domain/subdomain/tag filters
-  - JSON persistence in v0.1
+  - In-memory; persisted via the archive layer
 
 Tier 2: Vector semantic layer
   - Per-record float vectors
@@ -73,8 +73,8 @@ Tier 2: Vector semantic layer
 
 Tier 3: Archive layer
   - Durable source of truth
-  - v0.1 JSON store
-  - Future: SQLite, Postgres, S3, Git-backed memory packs
+  - JSON store (default) or optional SQLite (stdlib; auto-detected by .db/.sqlite path)
+  - Future: Postgres, S3, Git-backed memory packs
 ```
 
 The Aether evidence argues for this exact shape: prime addresses for hot deterministic paths, vector search for meaning, and conventional storage for history and auditability.
@@ -136,7 +136,6 @@ The value is the composition:
 Near-term:
 
 - Add benchmark scripts comparing tag filters against naive scans.
-- Add SQLite persistence.
 - Add importers for Markdown repositories.
 - Add a 29D adapter as optional Aether provenance support.
 - Add a stricter MCP protocol test harness.

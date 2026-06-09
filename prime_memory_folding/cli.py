@@ -19,7 +19,11 @@ def parse_jsonish(value: str | None, fallback: Any) -> Any:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="prime-memory", description="Prime Memory Folding CLI")
-    parser.add_argument("--store", default=".prime_memory_folding/store.json", help="Path to JSON store")
+    parser.add_argument(
+        "--store",
+        default=".prime_memory_folding/store.json",
+        help="Path to the store file; .json uses JSON, .db/.sqlite uses SQLite",
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     encode = sub.add_parser("encode", help="Encode a prime address")
