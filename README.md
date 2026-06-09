@@ -1,12 +1,25 @@
 # Prime Memory Folding
 
 [![CI](https://github.com/coryhubbell/prime-memory-folding/actions/workflows/ci.yml/badge.svg)](https://github.com/coryhubbell/prime-memory-folding/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10--3.12-blue.svg)](pyproject.toml)
+[![status](https://img.shields.io/badge/status-v0.1.0--alpha-orange.svg)](CHANGELOG.md)
+[![MCP](https://img.shields.io/badge/MCP-stdio%20server-purple.svg)](docs/MCP_IDE_SETUP.md)
 
 Standalone prime-addressed memory encoding with vector-aware folding and MCP IDE integration.
 
 **A small, honest, composable memory engine — extracted from the Aether-Hyper research system, with the math made public and the identity-bearing internals left behind.**
 
 Prime Memory Folding is not the claim that prime numbers beat databases. It is a reproducible *composition*: deterministic prime-addressed structure, semantic vector recall, decay-driven folding, and an MCP server — each layer doing the job it is actually good at, with a public claim surface kept deliberately narrower than the ambition. If a claim isn't demonstrable from the code, tests, benchmarks, or evidence in this repo, it isn't here.
+
+```mermaid
+flowchart LR
+    P["Prime addressing<br/>exact structure"] --> E(("Prime Memory<br/>Folding"))
+    V["Vector recall<br/>meaning"] --> E
+    F["Folding<br/>durability"] --> E
+    M["MCP server<br/>IDE reach"] --> E
+    E --> S["JSON / SQLite store"]
+```
 
 ## What it is
 
@@ -27,7 +40,13 @@ Prime Memory Folding is not the claim that prime numbers beat databases. It is a
 
 Benchmarks verify result-set equivalence *before* timing and show modest, dataset-dependent constant-factor wins over naive in-memory scans — stated as exactly that. The historical "60,000×" figure from the origin is retained only as caveated provenance. The repo was shaped by an adversarial build loop (a human director plus independent build/review lanes) that caught and corrected a broken headline encoding path and a benchmark that initially flattered the project.
 
-**Read deeper:** [Provenance & Breakthrough Thesis](docs/PUBLIC_THESIS.md) · [Technical Reproducibility Thesis](docs/TECHNICAL_REPRODUCIBILITY_THESIS.md)
+## Read by intent
+
+- **Use it** → [Quick Start](#quick-start)
+- **Trust it** → [Benchmarks](#benchmarks) · [Technical Reproducibility Thesis](docs/TECHNICAL_REPRODUCIBILITY_THESIS.md)
+- **Wire it into an IDE** → [MCP / IDE setup](docs/MCP_IDE_SETUP.md)
+- **Understand the design** → [Architecture](docs/ARCHITECTURE.md) · [Whitepaper](docs/TECHNICAL_WHITEPAPER.md)
+- **Where it came from** → [Provenance & Breakthrough Thesis](docs/PUBLIC_THESIS.md) · [Evidence](evidence/README.md)
 
 ## System Map
 
