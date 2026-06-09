@@ -19,5 +19,14 @@ jobs:
         run: python -m unittest discover -s tests
       - name: CLI smoke
         run: python -m prime_memory_folding encode architecture --tags '["technical","standalone"]'
-      - name: MCP smoke
-        run: printf '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}\n' | python -m prime_memory_folding.mcp_server
+      - name: MCP handshake smoke
+        run: |
+          printf '%s\n' \
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{}}}' \
+            '{"jsonrpc":"2.0","method":"notifications/initialized"}' \
+            '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
+            '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"prime_memory_stats"}}' \
+          | python -m prime_memory_folding.mcp_server | tee /tmp/mcp_out.txt
+          grep -q '"protocolVersion"' /tmp/mcp_out.txt
+          grep -q 'prime_memory_encode' /tmp/mcp_out.txt
+          grep -q '"id": 3' /tmp/mcp_out.txt

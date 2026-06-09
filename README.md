@@ -7,7 +7,7 @@ Prime Memory Folding extracts the useful core from the Aether-Hyper Prime work i
 - Prime-addressed hot memory: an O(1) domain index plus exact tag-intersection filtering (modest constant-factor wins over naive in-memory scans — see [Benchmarks](#benchmarks)).
 - Vector similarity for semantic retrieval.
 - Memory folding that decays, clusters, compresses, and promotes durable patterns.
-- A stdio MCP server with example configs for Claude, Cursor, VS Code, and JetBrains (local stdio JSON-RPC; per-IDE handshake not yet smoke-tested).
+- A stdio MCP server with example configs for Claude, Cursor, VS Code, and JetBrains. Protocol handshake smoke-tested in CI (initialize/tools-list/tools-call + malformed-frame recovery); not yet validated against a live IDE client.
 - A curated `evidence/` bundle of the original prime research: the origin cache implementation and the architectural analyses behind this design.
 
 ## Quick Start
